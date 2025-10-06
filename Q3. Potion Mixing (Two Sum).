@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    int n, target;
+    cin >> n;
+    vector<long long> arr(n);
+    for(int i = 0; i < n; i++) cin >> arr[i];
+    cin >> target;
+
+    unordered_map<long long, int> mp;
+    for(int i = 0; i < n; i++) {
+        long long need = target - arr[i];
+        if(mp.find(need) != mp.end()) {
+            cout << "(" << mp[need] << "," << i << ")";
+            return 0;
+        }
+        mp[arr[i]] = i;
+    }
+    cout << "No pair found";
+    return 0;
+}
