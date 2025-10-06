@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int floorElement(vector<int>& arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    int ans = -1;
+    while(left <= right) {
+        int mid = left + (right - left)/2;
+        if(arr[mid] <= target) {
+            ans = arr[mid];      // potential floor
+            left = mid + 1;      // move right to find larger ≤ target
+        } else {
+            right = mid - 1;
+        }
+    }
+    return ans;
+}
+
+int main() {
+    int n, target;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++) cin >> arr[i];
+    cin >> target;
+    cout << floorElement(arr, target);
+    return 0;
+}
