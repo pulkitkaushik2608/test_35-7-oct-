@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int firstGreaterEqual(vector<int>& arr, int target) {
+    int left = 0, right = arr.size() - 1;
+    int ans = arr.size(); // default to n if not found
+    while(left <= right) {
+        int mid = left + (right - left)/2;
+        if(arr[mid] >= target) {
+            ans = mid;
+            right = mid - 1; // move left to find first occurrence
+        } else {
+            left = mid + 1;
+        }
+    }
+    return ans;
+}
+
+int main() {
+    int n, target;
+    cin >> n;
+    vector<int> arr(n);
+    for(int i=0;i<n;i++) cin >> arr[i];
+    cin >> target;
+    cout << firstGreaterEqual(arr, target);
+    return 0;
+}
